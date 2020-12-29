@@ -1,2 +1,3 @@
 tar: hikari
+copy: patches/*.patch
 copy: hikari.watch

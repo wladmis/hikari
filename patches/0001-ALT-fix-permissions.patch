@@ -1,0 +1,39 @@
+From 205c311caa2bfa0b339e444ba1b6978bdc13bb46 Mon Sep 17 00:00:00 2001
+From: "Vladimir D. Seleznev" <vseleznv@altlinux.org>
+Date: Tue, 29 Dec 2020 19:04:31 +0300
+Subject: [PATCH] ALT: fix permissions
+
+---
+ hikari/Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/hikari/Makefile b/hikari/Makefile
+index 555b770..76b7664 100644
+--- a/hikari/Makefile
++++ b/hikari/Makefile
+@@ -113,10 +113,10 @@ CFLAGS += -DHAVE_SCREENCOPY=1
+ CFLAGS += -DHAVE_LAYERSHELL=1
+ .endif
+ 
+-.ifdef WITHOUT_SUID
+-PERMS = 555
++.ifdef WITH_SUID
++PERMS = 4711
+ .else
+-PERMS = 4555
++PERMS = 711
+ .endif
+ 
+ .ifdef WITH_VIRTUAL_INPUT
+@@ -251,7 +251,7 @@ install: hikari hikari-unlocker share/man/man1/hikari.1
+ 	sed "s,PREFIX,${PREFIX}," etc/hikari/hikari.conf > ${DESTDIR}/${ETC_PREFIX}/etc/hikari/hikari.conf
+ 	chmod 644 ${DESTDIR}/${ETC_PREFIX}/etc/hikari/hikari.conf
+ 	install -m ${PERMS} hikari ${DESTDIR}/${PREFIX}/bin
+-	install -m 4555 hikari-unlocker ${DESTDIR}/${PREFIX}/bin
++	install -m 2711 hikari-unlocker ${DESTDIR}/${PREFIX}/bin
+ 	install -m 644 share/man/man1/hikari.1 ${DESTDIR}/${PREFIX}/share/man/man1
+ 	install -m 644 share/backgrounds/hikari/hikari_wallpaper.png ${DESTDIR}/${PREFIX}/share/backgrounds/hikari/hikari_wallpaper.png
+ 	install -m 644 share/wayland-sessions/hikari.desktop ${DESTDIR}/${PREFIX}/share/wayland-sessions/hikari.desktop
+-- 
+2.29.2
+
